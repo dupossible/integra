@@ -186,7 +186,7 @@ async function listarUsuarios(filtro = '') {
                 }
             });
 
-            // Renderiza todas as linhas de uma vez na tabela
+            
             rows.forEach(row => resultsBody.appendChild(row));
             document.getElementById('resultsTable').style.display = rows.length ? 'table' : 'none';
         } else {
