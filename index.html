@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="pt-Br">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Cadastro Integrado</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="container-xl">
+	<div class="table-responsive">
+		<div class="table-wrapper">
+			<div class="table-title">
+				<div class="row">
+					<div class="col-sm-6">														
+					</div>
+						<div class="comtainer-fluid">
+							<input type="text" id="search" class="serchInput" required autocomplete="off" placeholder="Buscar...">
+							<button a href="#modalCadastro" class="btn btn-primary" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Cadastrar</span></a></button>
+							<!-- <a href="#deleteEmployeeModal" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Delete</span></a>-->						
+						</div>
+				</div>
+			</div>
+			<table id="resultsTable" class="table table-striped table-hover">
+				<thead>
+					<tr>
+				    <th>Nome</th>
+                        <th>Usuário</th>
+				    <th>CPF</th>
+				    <th>E-mail</th>
+                        <th>Órgão</th>
+                        <th>Ativo</th>
+                        <th>Auth</th> 
+                        <th>Ações</th>
+					</tr>
+				</thead>					
+					<tbody id="resultsBody">
+
+					</tbody>
+			
+</table>
+		</div>
+	</div>        
+</div>
+<!-- cadastro Modal -->
+<div id="modalCadastro" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form id="cadastroForm">
+                <div class="modal-header">						
+                    <div class="modal-title" id="cadastroModalLabel">Cadastrar Usuário</div>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group form-control-icon">
+                        <label for="nome">Nome</label>
+                        <input id="nome" type="text" class="form-control" required autocomplete="off" >
+                        <i class="material-icons">person</i>
+                    </div>
+                    <div class="form-group form-control-icon">
+                        <label for="username">Usuário</label>
+                        <input id="username" type="text" class="form-control" required autocomplete="off" >
+                        <i class="material-icons">account_circle</i>
+                    </div>
+                    <div class="form-group form-control-icon">
+                        <label for="email">E-mail</label>
+                        <input id="email" type="email" class="form-control" required autocomplete="off" >
+                        <i class="material-icons">email</i>
+                    </div>
+                    <div class="form-group form-control-icon">
+                        <label for="cpf">CPF</label>
+                        <input id="cpf" type="text" class="form-control" autocomplete="off" required maxlength="14" oninput="mascaraCpf(this)" pattern="^\d{3}\.\d{3}\.\d{3}-\d{2}$" title="Formato: XXX.XXX.XXX-XX">
+                        <i class="material-icons">credit_card</i>
+                    </div>
+                    <div class="form-group">
+                        <label for="agency"></label>
+                        <select id="agency"  class="form-control" required autocomplete="off" >
+							<option value="">Selecione um Órgão</option>
+							<option value="CONFEA">CONFEA</option>
+							<option value="CREAAC">CREA-AC</option>
+							<option value="CREAAL">CREA-AL</option>
+							<option value="CREAAP">CREA-AP</option>
+							<option value="CREAAM">CREA-AM</option>
+							<option value="CREABA">CREA-BA</option>
+							<option value="CREACE">CREA-CE</option>
+							<option value="CREADF">CREA-DF</option>
+							<option value="CREAES">CREA-ES</option>
+							<option value="CREAGO">CREA-GO</option>
+							<option value="CREAMA">CREA-MA</option>
+							<option value="CREAMT">CREA-MT</option>
+							<option value="CREAMS">CREA-MS</option>
+							<option value="CREAMG">CREA-MG</option>
+							<option value="CREAPA">CREA-PA</option>
+							<option value="CREAPB">CREA-PB</option>
+							<option value="CREAPR">CREA-PR</option>
+							<option value="CREAPE">CREA-PE</option>
+							<option value="CREAPI">CREA-PI</option>
+							<option value="CREARJ">CREA-RJ</option>
+							<option value="CREARN">CREA-RN</option>
+							<option value="CREARS">CREA-RS</option>
+							<option value="CREARO">CREA-RO</option>
+							<option value="CREARR">CREA-RR</option>
+							<option value="CREASC">CREA-SC</option>
+							<option value="CREASP">CREA-SP</option>
+							<option value="CREASE">CREA-SE</option>
+							<option value="CREATO">CREA-TO</option>
+							<option value="MUTUA">MÚTUA</option>
+						</select>
+                    </div>
+                    <div class="form-group">
+							<div class="status-toggle">
+							<span for="status" id="statusLabel">Status</span>
+                            <input type="checkbox" id="status">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
+                    <button id="salvarBtn" class="salvarBtn" type="submit">Salvar</button>
+				<div class="modal-message"></div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+ <!--Edição de usuário-->
+ <div id="editCadastro" class="modal fade">
+	<div class="modal-dialog">
+	    <div class="modal-content">
+		   <form id="editForm">
+			  <div class="modal-header">						
+				 <div class="modal-title" id="cadastroModalLabel">Editar Usuário</div>
+				 <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+					<span aria-hidden="true">&times;</span>
+				 </button>
+			  </div>
+			  <div class="modal-body">
+				 <div class="form-group form-control-icon">
+					<label for="nome">Nome</label>
+					<input id="editName" type="text" class="form-control" required autocomplete="off" >
+					<i class="material-icons">person</i>
+				 </div>
+				 <div class="form-group form-control-icon">
+					<label for="username">Usuário</label>
+					<input id="editUsername" type="text" class="form-control" required autocomplete="off" >
+					<i class="material-icons">account_circle</i>
+				 </div>
+				 <div class="form-group form-control-icon">
+					<label for="cpf"></label>
+					<input id="editCpf" type="text" class="form-control" autocomplete="off" required maxlength="14" oninput="mascaraCpf(this)" pattern="^\d{3}\.\d{3}\.\d{3}-\d{2}$" title="Formato: XXX.XXX.XXX-XX">
+					<i class="material-icons">credit_card</i>
+				 </div>
+				 <div class="form-group form-control-icon">
+					<label for="email">E-mail</label>
+					<input id="editEmail" type="email" class="form-control" required autocomplete="off" >
+					<i class="material-icons">email</i>
+				 </div>
+				
+				 <div class="form-group">
+					<label for="agency"></label>
+					<select id="editAgency"  class="form-control" required autocomplete="off" >
+							 <option value="">Selecione um Órgão</option>
+							 <option value="CONFEA">CONFEA</option>
+							 <option value="CREAAC">CREA-AC</option>
+							 <option value="CREAAL">CREA-AL</option>
+							 <option value="CREAAP">CREA-AP</option>
+							 <option value="CREAAM">CREA-AM</option>
+							 <option value="CREABA">CREA-BA</option>
+							 <option value="CREACE">CREA-CE</option>
+							 <option value="CREADF">CREA-DF</option>
+							 <option value="CREAES">CREA-ES</option>
+							 <option value="CREAGO">CREA-GO</option>
+							 <option value="CREAMA">CREA-MA</option>
+							 <option value="CREAMT">CREA-MT</option>
+							 <option value="CREAMS">CREA-MS</option>
+							 <option value="CREAMG">CREA-MG</option>
+							 <option value="CREAPA">CREA-PA</option>
+							 <option value="CREAPB">CREA-PB</option>
+							 <option value="CREAPR">CREA-PR</option>
+							 <option value="CREAPE">CREA-PE</option>
+							 <option value="CREAPI">CREA-PI</option>
+							 <option value="CREARJ">CREA-RJ</option>
+							 <option value="CREARN">CREA-RN</option>
+							 <option value="CREARS">CREA-RS</option>
+							 <option value="CREARO">CREA-RO</option>
+							 <option value="CREARR">CREA-RR</option>
+							 <option value="CREASC">CREA-SC</option>
+							 <option value="CREASP">CREA-SP</option>
+							 <option value="CREASE">CREA-SE</option>
+							 <option value="CREATO">CREA-TO</option>
+							 <option value="MUTUA">MÚTUA</option>
+						 </select>
+				 </div>
+				 <div class="form-group">
+							 <div class="status-toggle">
+							 <span for="status" id="statusLabel">Status</span>
+					    <input type="checkbox" id="editActive">
+					</div>
+				 </div>
+			  </div>
+			  <div class="modal-footer">
+				 <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
+				 <button id="saveChanges" class="salvarBtn" type="submit">Salvar</button>
+				 <div class="modal-message"></div>
+			  </div>
+		   </form>
+	    </div>
+	</div>
+ </div>
+
+<script src="script.js"></script>
+</body>
+</html>
